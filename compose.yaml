@@ -1,0 +1,16 @@
+services:
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: postgres
+    image: postgres:17.0-alpine3.20
+    ports:
+      - 5432:5432
+
+  web:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/web
